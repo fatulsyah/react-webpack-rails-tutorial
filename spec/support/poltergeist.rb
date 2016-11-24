@@ -16,19 +16,28 @@ RSpec.configure do |config|
       puts "example.exception = #{example.exception.ai}"
       puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
-      break unless example.exception.is_a?(Capybara::Poltergeist::StatusFailError) ||
-                   example.exception.is_a?(RSpec::Core::MultipleExceptionError)
+      is_multiple_exception = example.exception.is_a?(RSpec::Core::MultipleExceptionError)
 
-      if example.exception.is_a?(RSpec::Core::MultipleExceptionError)
+      break unless example.exception.is_a?(Capybara::Poltergeist::StatusFailError) ||
+                   is_multiple_exception
+
+      if is_multiple_exception
+        m_exceptions = example.exception.all_exceptions
         puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
         puts "poltergeist.rb: #{__LINE__},  method: #{__method__}"
-        puts "example.exception = #{example.exception.all_exceptions.ai}"
+        puts "m_exceptions = #{m_exceptions.ai}"
+        puts "m_exceptions.first.class < SystemCallError is "\
+             "{m_exceptions.first.class < SystemCallError}"
         puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
-        idx = example.exception.all_exceptions.find_index do |exception|
+        idx = m_exceptions.find_index do |exception|
           exception.is_a?(Capybara::Poltergeist::StatusFailError) ||
-            exception < SystemCallError
+            exception.class < SystemCallError
         end
+        puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+        puts "poltergeist.rb: #{__LINE__},  method: #{__method__}"
+        puts "idx = #{idx.ai}"
+        puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
         break unless idx
       end
