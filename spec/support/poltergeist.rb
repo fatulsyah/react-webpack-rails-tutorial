@@ -25,7 +25,8 @@ RSpec.configure do |config|
         puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
         idx = example.exception.all_exceptions.find_index do |exception|
-          exception.is_a?(Capybara::Poltergeist::StatusFailError)
+          exception.is_a?(Capybara::Poltergeist::StatusFailError) ||
+            exception.is_a?(Errno::EPIPE)
         end
 
         break unless idx
