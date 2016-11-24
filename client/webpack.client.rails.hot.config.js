@@ -1,3 +1,6 @@
+/* eslint comma-dangle: ["error",
+  {"functions": "never", "arrays": "only-multiline", "objects": "only-multiline"} ] */
+
 // Run with Rails server like this:
 // rails s
 // cd client && babel-node server-rails-hot.js
@@ -12,13 +15,13 @@ const hotRailsPort = process.env.HOT_RAILS_PORT || 3500;
 
 config.entry.app.push(
   `webpack-dev-server/client?http://localhost:${hotRailsPort}`,
-  'webpack/hot/only-dev-server',
+  'webpack/hot/only-dev-server'
 );
 
 // These are Rails specific
 config.entry.vendor.push(
   'jquery-ujs',
-  'bootstrap-loader',
+  'bootstrap-loader'
 );
 
 config.output = {
@@ -71,12 +74,12 @@ config.module.loaders.push(
   {
     test: require.resolve('jquery-ujs'),
     loader: 'imports?jQuery=jquery',
-  },
+  }
 );
 
 config.plugins.push(
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoErrorsPlugin()
 );
 
 config.devtool = 'eval-source-map';

@@ -1,3 +1,6 @@
+/* eslint comma-dangle: ["error",
+  {"functions": "never", "arrays": "only-multiline", "objects": "only-multiline"} ] */
+
 // Run like this:
 // cd client && node server-express.js
 
@@ -16,7 +19,7 @@ config.entry.app.push(
 
   // Webpack dev server
   `webpack-dev-server/client?http://localhost:${hotPort}`,
-  'webpack/hot/dev-server',
+  'webpack/hot/dev-server'
 );
 
 config.output = {
@@ -27,7 +30,7 @@ config.output = {
 };
 config.plugins.unshift(
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoErrorsPlugin()
 );
 config.devtool = 'eval-source-map';
 
@@ -71,7 +74,7 @@ config.module.loaders.push(
       'sass',
       'sass-resources',
     ],
-  },
+  }
 );
 
 module.exports = config;
