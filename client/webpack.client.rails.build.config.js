@@ -21,7 +21,7 @@ config.entry.vendor.unshift(
   'jquery-ujs',
 
   // Configures extractStyles to be true if NODE_ENV is production
-  'bootstrap-loader/extractStyles'
+  'bootstrap-loader/extractStyles',
 );
 
 // See webpack.common.config for adding modules common to both the webpack dev server and rails
@@ -37,7 +37,7 @@ config.module.loaders.push(
     loader: ExtractTextPlugin.extract(
       'style',
       'css?minimize&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]' +
-      '!postcss'
+      '!postcss',
     ),
   },
   {
@@ -47,7 +47,7 @@ config.module.loaders.push(
       'css?minimize&modules&importLoaders=3&localIdentName=[name]__[local]__[hash:base64:5]' +
       '!postcss' +
       '!sass' +
-      '!sass-resources'
+      '!sass-resources',
     ),
   },
   {
@@ -57,12 +57,12 @@ config.module.loaders.push(
   {
     test: require.resolve('jquery-ujs'),
     loader: 'imports?jQuery=jquery',
-  }
+  },
 );
 
 config.plugins.push(
   new ExtractTextPlugin('[name]-bundle.css', { allChunks: true }),
-  new webpack.optimize.DedupePlugin()
+  new webpack.optimize.DedupePlugin(),
 );
 
 if (devBuild) {
