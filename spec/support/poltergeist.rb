@@ -1,4 +1,4 @@
-CAPYBARA_TIMEOUT_RETRIES = 4
+CAPYBARA_TIMEOUT_RETRIES = 6
 
 # HACK: workaround for Capybara Poltergeist StatusFailErrors, simply retries
 # from https://gist.github.com/afn/c04ccfe71d648763b306
@@ -6,6 +6,7 @@ RSpec.configure do |config|
   config.around(:each, type: :feature) do |ex|
     example = RSpec.current_example
     CAPYBARA_TIMEOUT_RETRIES.times do
+      sleep 1
       example.instance_variable_set("@exception", nil)
       __init_memoized
       ex.run
