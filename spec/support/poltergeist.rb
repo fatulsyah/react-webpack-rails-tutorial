@@ -15,8 +15,8 @@ RSpec.configure do |config|
       puts "example.exception = #{example.exception.ai}"
       puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
-
-      break unless example.exception.is_a?(Capybara::Poltergeist::StatusFailError)
+      break unless example.exception.is_a?(Capybara::Poltergeist::StatusFailError) ||
+                   example.exception.is_a?(RSpec::Core::MultipleExceptionError)
 
       if example.exception.is_a?(RSpec::Core::MultipleExceptionError)
         puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
@@ -24,13 +24,11 @@ RSpec.configure do |config|
         puts "example.exception = #{example.exception.all_exceptions.ai}"
         puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
-        idx = example.exception.all_exceptions.find_index do |ex|
-          ex.is_a?(Capybara::Poltergeist::StatusFailError)
+        idx = example.exception.all_exceptions.find_index do |exception|
+          exception.is_a?(Capybara::Poltergeist::StatusFailError)
         end
 
         break unless idx
-      else
-        break
       end
 
       puts("\nCapybara::Poltergeist::StatusFailError at #{example.location}\n   Restarting phantomjs and retrying...")
