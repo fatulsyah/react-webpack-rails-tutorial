@@ -27,7 +27,7 @@ RSpec.configure do |config|
 
         idx = example.exception.all_exceptions.find_index do |exception|
           exception.is_a?(Capybara::Poltergeist::StatusFailError) ||
-            exception.is_a?(Errno::EPIPE)
+            exception < SystemCallError
         end
 
         break unless idx
