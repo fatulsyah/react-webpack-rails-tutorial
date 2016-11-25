@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Alert from 'react-bootstrap/lib/Alert';
-import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash';
 
 import BaseComponent from 'libs/components/BaseComponent';
