@@ -6,7 +6,6 @@ RSpec.configure do |config|
   config.around(:each, type: :feature) do |ex|
     example = RSpec.current_example
     CAPYBARA_TIMEOUT_RETRIES.times do
-      sleep 1
       example.instance_variable_set("@exception", nil)
       __init_memoized
       ex.run
