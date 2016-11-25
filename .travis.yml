@@ -26,7 +26,7 @@ install:
   - bundle install
   - nvm install 6.9.1
   - nvm use 6.9.1
-  - npm install
+  - npm install npm@4.0.2
   - rake db:setup
 # No need to run xvfb if running headless testing
 #before_script:
